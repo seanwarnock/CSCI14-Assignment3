@@ -26,6 +26,29 @@ Start program with menu.
 
 using namespace std;
 
+
+void arraymaker (int * NewArray, int intArrayToMake)
+{
+  int intCounter;
+
+
+  //Time to stuff the array
+    for (intCounter=1; intCounter<=intArrayToMake; intCounter++)
+    {
+      NewArray[intCounter] = rand()% intArrayToMake + 1;
+      cout << intCounter << "\t"  << NewArray[intCounter] << endl;
+    }
+}
+
+void sumnation (int SumArray[])
+{
+  //
+
+
+}
+
+
+
  int main ()
  {
   bool boolRunAgain = true;
@@ -33,20 +56,11 @@ using namespace std;
   do
   {
     int ArraySize = 100;
-    int intCounter;
+    int floatArrayTest[ArraySize];
     char charRunAgain;
+    float floatMenuChoice;
 
     srand((unsigned)time(NULL));
-
-
-
-
-
-
-
-
-
-
 
 
     cout << "[1] Create Array and populate it with random numbers." << endl;
@@ -56,21 +70,46 @@ using namespace std;
     cout << "[5] Find an integer value in the array and it's location" << endl;
     cout << "[9] Exit" << endl;
 
+    cin >> floatMenuChoice;
+
+  switch (int(floatMenuChoice))
+  {
+    case 1 :
+      cout << "How large would you like your array? " << endl;
+      cin >> ArraySize;
+      arraymaker(floatArrayTest,ArraySize);
+      break;
+
+    case 2 :
+      cout << "Highest and lowest value.";
+      break;
+
+    case 3 :
+      cout << "sum time.";
+      break;
+
+    case 4 :
+      cout << "Even odd";
+      break;
+
+    case 5 :
+      cout << "find stuff";
+      break;
+
+    case 9 :
+      cout << "Exit!";
+      break;
+
+
+
+  }
+
+
 
 
     // Array population stuff.
 
-    cout << "How large would you like your array? " << endl;
-    cin >> ArraySize;
 
-    float floatArrayTest[ArraySize] = {0};
-
-  //Time to stuff the array
-    for (intCounter=1; intCounter<=ArraySize; intCounter++)
-    {
-      floatArrayTest[intCounter] = rand()% ArraySize + 1;
-      cout << intCounter << "\t"  << floatArrayTest[intCounter] << endl;
-    }
 
 
 
@@ -92,4 +131,3 @@ using namespace std;
   script to determine if the program ran normally or did something "off".
   */
  }
-
