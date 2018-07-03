@@ -136,7 +136,7 @@ To-Do deal with the output of average to handle non-integer values.
         cout << "Exit!";
         boolRunAgain = false;
         break;
-  }
+    }
   }
   while (boolRunAgain == true);
 
