@@ -26,37 +26,42 @@ Start program with menu.
 
 using namespace std;
 
-
-int arraymaker (int * NewArray, int intMaxArraySize)
+void HighLow (int HighLowArray[], int intHighLowArraySize)
 {
-  int intArrayToMake;
-  int intCounter;
+/*
+This function takes in an array and determines the highest and lowest numeric values.
+It will output these values and positions in the array to std out.
+*/
 
-  srand((unsigned)time(NULL));
+  int intLowestValue = HighLowArray[0];
+  int intLowestValuePosition = 0;
+  int intHighestValue = HighLowArray[0];
+  int intHighestValuePosition = 0;
 
-  cout << "How large would you like your array?  Please choose a value from 1 to " << intMaxArraySize << endl;
 
-  cin >> intArrayToMake;
-  //Time to stuff the array
-    for (intCounter=0; intCounter<=(intArrayToMake - 1); intCounter++)
+  for (int intCounter = 0; (intCounter < intHighLowArraySize); intCounter++)
+  {
+    cout << intCounter << "\t" << HighLowArray[intCounter] << endl;
+    if (HighLowArray[intCounter] < intLowestValue)
     {
-
-      NewArray[intCounter] = rand()% intArrayToMake + 1;
-      cout << intCounter << "\t"  << NewArray[intCounter] << endl;
+      intLowestValue = HighLowArray[intCounter];
     }
+
+    if (HighLowArray[intCounter] > intHighestValue)
+    {
+      intHighestValue = HighLowArray[intCounter];
+    }
+  }
+
+cout << "ArraySize: " <<intHighLowArraySize << endl;
+    cout << "High = " << intHighestValue << endl;
+    cout << "Low = "  << intLowestValue << endl;
     system("pause");
-  return intArrayToMake;
-}
-
-void HighLow (int HighLowArray[], int intArraySize)
-{
-
-
 
 }
 
 
-void sumnation (int SumArray[], int intArraySize)
+void sumnation (int SumArray[], int intSumArraySize)
 {
 /*
 This function takes in an array and a maximum value in the array to sum and average.
@@ -64,81 +69,115 @@ This function assumes to start at the 0 position of the array.
 
 To-Do deal with the output of average to handle non-integer values.
 */
-
-  int intCounter;
   int intArraySum = 0;
 
 
-  for (intCounter=0; (intCounter <= intArraySize); intCounter++)
+  for (int intCounter = 0; intCounter < intSumArraySize; intCounter++)
   {
+    cout << intCounter << "\t" << SumArray[intCounter] << endl;
     intArraySum = intArraySum + SumArray[intCounter];
   }
   cout << "The SUM of the array is: " << intArraySum << endl;
-  cout << "The average value of the array is:" << (intArraySum / intArraySize) << endl;
+  cout << "The average value of the array is:" << (float(intArraySum) / intSumArraySize) << endl;
+  system("pause");
+}
+
+void oddsquad (int OddArray[], int intOddArraySize)
+{
+/*
+This function will output the even and odd values of the array.
+
+*/
+  for (int intCounter = 0; intCounter < intOddArraySize; intCounter++)
+  {
+
+  }
+
+  cout <<setw(8) << "Position" << setw(20) << "ODD" << setw(20) << "EVEN";
   system("pause");
 
 }
 
-
-
  int main ()
  {
-  bool boolRunAgain = true;
-  const int MaxArraySize = 10000;
-  int UserArraySize = 0;
-  int floatArrayTest[MaxArraySize];
+  bool boolOutRunAgain = true;
+  char charMenuChoice;
 
   do
   {
-
-    char charRunAgain;
+    //char charRunAgain;
+    bool boolInRunAgain = true;
     float floatMenuChoice;
-
-
+    int intArrayToMake;
 
     //boolRunAgain = true;
 
     system("cls");
-    cout << "[1] Create Array and populate it with random numbers." << endl;
-    cout << "[2] Find highest and lowest value in the array." << endl;
-    cout << "[3] Sum of array and average" << endl;
-    cout << "[4] Provide SUM of EVEN and ODD array values" << endl;
-    cout << "[5] Find an integer value in the array and it's location" << endl;
-    cout << "[9] Exit" << endl;
 
-    cin >> floatMenuChoice;
+    cout << "How large would you like your array?" << endl;
 
-    switch (int(floatMenuChoice))
+    // Need input control
+    cin >> intArrayToMake;
+    //Time to stuff the array
+
+    int intArray[intArrayToMake];
+    for (int intCounter=0; intCounter<=(intArrayToMake - 1); intCounter++)
+      {
+        intArray[intCounter] = rand()% intArrayToMake + 1;
+        cout << intCounter << "\t"  << intArray[intCounter] << endl;
+      }
+    system("pause");
+    do
     {
-      case 1 :
-        UserArraySize = arraymaker(floatArrayTest, MaxArraySize);
+      system("cls");
+      cout << "[1] Find highest and lowest value in the array." << endl;
+      cout << "[2] Sum of array and average" << endl;
+      cout << "[3] Provide SUM of EVEN and ODD array values" << endl;
+      cout << "[4] Find an integer value in the array and it's location" << endl;
+      cout << "[9] Exit" << endl;
+
+      cin >> floatMenuChoice;
+
+
+
+
+      switch (int(floatMenuChoice))
+      {
+///////////////////////////////////////////////////////////////////////////////
+        case 1 :
+          HighLow(intArray, intArrayToMake);
         break;
 
-      case 2 :
-        cout << "Highest and lowest value.";
-        HighLow(floatArrayTest, UserArraySize);
+        case 2 :
+          sumnation(intArray, intArrayToMake);
         break;
 
-      case 3 :
-        cout << "sum time.";
-        sumnation(floatArrayTest, UserArraySize);
+        case 3 :
+          oddsquad(intArray, intArrayToMake);
         break;
 
-      case 4 :
-        cout << "Even odd";
+        case 4 :
+          cout << "find stuff";
         break;
 
-      case 5 :
-        cout << "find stuff";
+        case 9 :
+          cout << "Exit!";
+          boolInRunAgain = false;
         break;
+      }
+    }
+    while(boolInRunAgain == true);
 
-      case 9 :
-        cout << "Exit!";
-        boolRunAgain = false;
-        break;
+
+    system("cls");
+    cout << "Would you like to run again [Y] or N? ";
+    cin >> charMenuChoice;
+    if ((charMenuChoice == 'n') or (charMenuChoice == 'N'))
+    {
+      boolOutRunAgain = false;
     }
   }
-  while (boolRunAgain == true);
+  while (boolOutRunAgain == true);
 
   return 0;
  }
