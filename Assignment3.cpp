@@ -38,6 +38,7 @@ It will output these values and positions in the array to std out.
   int intHighestValue = HighLowArray[0];
   int intHighestValuePosition = 0;
 
+  system("cls");
 
   for (int intCounter = 0; (intCounter < intHighLowArraySize); intCounter++)
   {
@@ -45,17 +46,19 @@ It will output these values and positions in the array to std out.
     if (HighLowArray[intCounter] < intLowestValue)
     {
       intLowestValue = HighLowArray[intCounter];
+      intLowestValuePosition = intCounter;
     }
 
     if (HighLowArray[intCounter] > intHighestValue)
     {
       intHighestValue = HighLowArray[intCounter];
+      intHighestValuePosition = intCounter;
     }
   }
 
 cout << "ArraySize: " <<intHighLowArraySize << endl;
-    cout << "High = " << intHighestValue << endl;
-    cout << "Low = "  << intLowestValue << endl;
+    cout << "The highest value in the array is : " << intHighestValue << " located at position : " << intHighestValuePosition << endl;
+    cout << "The lowest value in the array is : "  << intLowestValue << " located at position : " << intLowestValuePosition << endl;
     system("pause");
 
 }
@@ -67,10 +70,12 @@ void sumnation (int SumArray[], int intSumArraySize)
 This function takes in an array and a maximum value in the array to sum and average.
 This function assumes to start at the 0 position of the array.
 
-To-Do deal with the output of average to handle non-integer values.
+FIXED To-Do deal with the output of average to handle non-integer values.
+To-Do setup output to deal with all possible positions for search value.
 */
   int intArraySum = 0;
 
+  system("cls");
 
   for (int intCounter = 0; intCounter < intSumArraySize; intCounter++)
   {
@@ -78,19 +83,23 @@ To-Do deal with the output of average to handle non-integer values.
     intArraySum = intArraySum + SumArray[intCounter];
   }
   cout << "The SUM of the array is: " << intArraySum << endl;
-  cout << "The average value of the array is:" << (float(intArraySum) / intSumArraySize) << endl;
+  cout << "The average value of the array is: " << (float(intArraySum) / intSumArraySize) << endl;
   system("pause");
 }
 
 void oddsquad (int OddArray[], int intOddArraySize)
 {
 /*
-This function will output the even and odd values of the array.
+This function will output the even and odd values of the array and
+count the total number of each.
 
 */
   int intOddSum = 0;
+  int intOddCount = 0;
   int intEvenSum = 0;
+  int intEvenCount = 0;
 
+  system("cls");
   cout << "ODD" << endl;
 
   for (int intCounter = 0; intCounter < intOddArraySize; intCounter++)
@@ -100,11 +109,12 @@ This function will output the even and odd values of the array.
     {
       cout << intCounter << "\t" << OddArray[intCounter] << endl;
       intOddSum = intOddSum + OddArray[intCounter];
+      intOddCount++;
     }
 
   }
 
-  cout << "Sum of ODD values: " << intOddSum << endl;
+  cout << "There are a total of " << intOddCount << " ODD values that SUM to : " << intOddSum << endl;
   cout << "EVEN" << endl;
 
   for (int intCounter = 0; intCounter < intOddArraySize; intCounter++)
@@ -114,11 +124,12 @@ This function will output the even and odd values of the array.
     {
       cout << intCounter << "\t" << OddArray[intCounter] << endl;
       intEvenSum = intEvenSum + OddArray[intCounter];
+      intEvenCount++;
     }
 
   }
   //cout <<setw(8) << "Position" << setw(20) << "ODD" << setw(20) << "EVEN";
-  cout << "Sum of EVEN values: " << intEvenSum << endl;
+  cout << "There are a total of "<< intEvenCount << " EVEN values that SUM to : " << intEvenSum << endl;
 
   system("pause");
 
@@ -128,21 +139,55 @@ void needleinhaystack (int SearchArray[], int intSearchArraySize)
 {
 /*
 This function will allow a user to find a value in the array and it's location.
+
+To-Do clean up output for pagination.
 */
   int intNumbertoSearch;
+  bool boolFoundIt = false;
+  bool boolSearchAgain =  true;
+  char charSearchQuestion;
 
-  system ("cls");
-  cout << "Please enter a number to search for : ";
-  cin >> intNumbertoSearch;
-
-  for (int intCounter = 0; intCounter < intSearchArraySize; intCounter++)
+  do
   {
-    if (intNumbertoSearch == SearchArray[intCounter])
+    system ("cls");
+    cout << "Please enter a number to search for : ";
+    cin >> intNumbertoSearch;
+    system ("cls");
+    cout << "You are searching for the number : " << intNumbertoSearch << endl;
+
+    for (int intCounter = 0; intCounter < intSearchArraySize; intCounter++)
     {
-      cout << "Number " << intNumbertoSearch << " found at position: " << intCounter << endl;
+      if (intNumbertoSearch == SearchArray[intCounter])
+      {
+        cout << "Number " << intNumbertoSearch << " found at array position: " << intCounter << endl;
+        boolFoundIt = true;
+      }
     }
-  }
-  system("pause");
+    if (boolFoundIt != true)
+    {
+      cout << "The number " << intNumbertoSearch << " was not found in the array." << endl;
+    }
+
+    cout << endl << endl; //I hate formatting this way but I'm out of time to play.
+
+    for (int intCounter = 0; intCounter < intSearchArraySize; intCounter++)
+    {
+      cout << intCounter << "\t" << SearchArray[intCounter] << endl;
+    }
+
+    system("pause");
+    system("cls");
+
+    cout << "Would you like to search for another number [Y] or N ";
+    cin >> charSearchQuestion;
+
+    if ((charSearchQuestion == 'n') or (charSearchQuestion == 'N'))
+    {
+      boolSearchAgain = false;
+    }
+
+  } while (boolSearchAgain == true);
+
 }
 
  int main ()
@@ -178,10 +223,10 @@ This function will allow a user to find a value in the array and it's location.
     {
       system("cls");
       cout << "[1] Find highest and lowest value in the array." << endl;
-      cout << "[2] Sum of array and average" << endl;
-      cout << "[3] Provide SUM of EVEN and ODD array values" << endl;
+      cout << "[2] Provide the SUM and AVERAGE of array values" << endl;
+      cout << "[3] List the EVEN and ODD values with total count" << endl;
       cout << "[4] Find an integer value in the array and it's location" << endl;
-      cout << "[9] Exit" << endl;
+      cout << "[9] Stop playing with this array." << endl;
 
       cin >> floatMenuChoice;
 
