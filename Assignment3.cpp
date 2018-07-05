@@ -1,7 +1,7 @@
 /*
 Sean Warnock
 CSCI 14 Summer 2018
-Assignment 2 due 7/5/2018
+Assignment 3 due 7/5/2018
 https://github.com/seanwarnock/CSCI14-Assignment3.git
 */
 
