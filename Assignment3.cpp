@@ -2,7 +2,7 @@
 Sean Warnock
 CSCI 14 Summer 2018
 Assignment 2 due 7/5/2018
-https://github.com/seanwarnock/CSCI14-Assignment2
+https://github.com/seanwarnock/CSCI14-Assignment3.git
 */
 
 
@@ -88,14 +88,61 @@ void oddsquad (int OddArray[], int intOddArraySize)
 This function will output the even and odd values of the array.
 
 */
+  int intOddSum = 0;
+  int intEvenSum = 0;
+
+  cout << "ODD" << endl;
+
   for (int intCounter = 0; intCounter < intOddArraySize; intCounter++)
   {
+    //loop through and dump odd numbers
+    if ((OddArray[intCounter]%2) != 0)
+    {
+      cout << intCounter << "\t" << OddArray[intCounter] << endl;
+      intOddSum = intOddSum + OddArray[intCounter];
+    }
 
   }
 
-  cout <<setw(8) << "Position" << setw(20) << "ODD" << setw(20) << "EVEN";
+  cout << "Sum of ODD values: " << intOddSum << endl;
+  cout << "EVEN" << endl;
+
+  for (int intCounter = 0; intCounter < intOddArraySize; intCounter++)
+  {
+    //loop through and dump even numbers.
+    if ((OddArray[intCounter]%2) == 0)
+    {
+      cout << intCounter << "\t" << OddArray[intCounter] << endl;
+      intEvenSum = intEvenSum + OddArray[intCounter];
+    }
+
+  }
+  //cout <<setw(8) << "Position" << setw(20) << "ODD" << setw(20) << "EVEN";
+  cout << "Sum of EVEN values: " << intEvenSum << endl;
+
   system("pause");
 
+}
+
+void needleinhaystack (int SearchArray[], int intSearchArraySize)
+{
+/*
+This function will allow a user to find a value in the array and it's location.
+*/
+  int intNumbertoSearch;
+
+  system ("cls");
+  cout << "Please enter a number to search for : ";
+  cin >> intNumbertoSearch;
+
+  for (int intCounter = 0; intCounter < intSearchArraySize; intCounter++)
+  {
+    if (intNumbertoSearch == SearchArray[intCounter])
+    {
+      cout << "Number " << intNumbertoSearch << " found at position: " << intCounter << endl;
+    }
+  }
+  system("pause");
 }
 
  int main ()
@@ -110,7 +157,7 @@ This function will output the even and odd values of the array.
     float floatMenuChoice;
     int intArrayToMake;
 
-    //boolRunAgain = true;
+    srand (time(NULL));
 
     system("cls");
 
@@ -157,7 +204,7 @@ This function will output the even and odd values of the array.
         break;
 
         case 4 :
-          cout << "find stuff";
+          needleinhaystack(intArray, intArrayToMake);
         break;
 
         case 9 :
